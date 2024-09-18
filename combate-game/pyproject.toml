@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "combate-game"
+version = "0.1.0"
+description = "Um jogo de combate desenvolvido em Python"
+authors = ["Leonardo Vitale <leonardo.vitale@outlook.com>"]
+# readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+colorama = "^0.4.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
