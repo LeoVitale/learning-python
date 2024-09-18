@@ -1,4 +1,5 @@
 from colorama import init, Fore, Style
+from random import randint
 
 
 init(autoreset=True)
@@ -23,7 +24,7 @@ class Character:
         return f"\nName: {self.get_name()}\nHealth: {self.get_health()}\nLevel: {self.get_level()}\n"
 
     def attack(self, enemy: "Character"):
-        damage = self.get_level() * 2
+        damage = randint(self.get_level() * 2, self.get_level() * 4)
         enemy.update_health(damage)
         print(
             f"\n{Fore.YELLOW}{self.get_name()} attacked {enemy.get_name()} for {damage} damage{Style.RESET_ALL}\n"
@@ -49,7 +50,7 @@ class Hero(Character):
         return f"{super().show_stats()}\nAttack Type: {self.get_attack_type()}"
 
     def magic_attack(self, enemy: "Character"):
-        damage = self.get_level() * 5
+        damage = randint(self.get_level() * 5, self.get_level() * 8)
         enemy.update_health(damage)
         print(
             f"\n{Fore.CYAN}{self.get_name()} used a magic attack on {enemy.get_name()} for {damage} damage{Style.RESET_ALL}\n"
@@ -99,11 +100,18 @@ class Battle:
             else:
                 print("Invalid attack type")
 
+            if self.enemy.get_health() > 0:
+                self.enemy.attack(self.hero)
+
         if self.hero.get_health() > 0:
-            print(f"\n{self.hero.get_name()} wins the battle")
+            print(
+                f"\n{Fore.GREEN}{self.hero.get_name()} wins the battle{Style.RESET_ALL}"
+            )
 
         else:
-            print(f"\n{self.enemy.get_name()} wins the battle")
+            print(
+                f"\n{Fore.RED}{self.enemy.get_name()} wins the battle{Style.RESET_ALL}"
+            )
 
 
 hero = Hero(name="Arus", health=200, level=10, attack_type="Super Attack")
